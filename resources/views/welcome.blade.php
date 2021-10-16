@@ -43,12 +43,12 @@
             <h2>All User's Form Database</h2>
         </div>
 
-        <div class="clearfix">
+        <div class="clearfix mb-5">
 
             <div class="float-left"></div>
             <div class="float-right">   
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Launch demo modal
+                    Add
                   </button>
             </div>
 

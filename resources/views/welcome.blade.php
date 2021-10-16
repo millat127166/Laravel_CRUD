@@ -51,67 +51,153 @@
                     Add
                   </button>
             </div>
-
           </div>
-     
-        <table class="table table-striped">
+          @if (session('success'))
+
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>{{ session('success') }}</strong> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+              
+          @endif
+        <table class="table table-bordered text-center">
             <thead>
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">#Serial No </th>
+                <th scope="col">First Name </th>
+                <th scope="col">Last Name </th>
+                <th scope="col">Phone Number</th>
+                <th scope="col">Address</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
+              @foreach ($data as $item)
+                  
+           
               <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+               
+                <td>{{ $item->id }}</td>
+                <td>{{ $item->fname }}</td>
+                <td>{{ $item->lname }}</td>
+                <td>{{ $item->phoneno }}</td>
+                <td>{{ $item->address }}</td>
+            
+              
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#EditeUser">
+                        Edite
+                      </button>
+                      || 
+                    <button onclick="return confirm()" type="button" class="btn btn-danger">Delete</button> 
+          
+                </td>
               </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
+
+              @endforeach
+          
             </tbody>
           </table>
     </div>
 
-
-    {{-- Modal is g --}}
-<!-- Modal -->
-
-
-    <!-- Modal -->
+    <!-- Modal  For Create -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Create User Form </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+   
+
+        <div class="modal-body">
+
+            <form action="{{ url('adduser') }}" method="POST">
+              @csrf
+
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Frist Name </label>
+                  <input name="fname" type="text" class="form-control @error('fname')is-invalid @enderror" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Last Name </label>
+                    <input name="lname" type="text" class="form-control @error('lname')is-invalid @enderror " id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Phone Number </label>
+                    <input name="phoneno" type="number" class="form-control @error('phoneno')is-invalid @enderror " id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Address </label>
+                    <input name="address" type="text" class="form-control @error('address')is-invalid @enderror" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted"></small>
+                  </div>
+
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                  </div>
+                </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- Modal  For Create -->
+
+      <!-- Modal  For Edite -->
+<div class="modal fade" id="EditeUser" tabindex="-1" aria-labelledby="EditeUser" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update User Form </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          ...
+            <form action="" method="POST">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Frist Name </label>
+                  <input name="fname" type="text" class="form-control" id="exampleInputEmail1" value="Millat" aria-describedby="emailHelp">
+                  <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Last Name </label>
+                    <input name="lname" type="text" class="form-control" id="exampleInputEmail1" value="Hussain" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Phone Number </label>
+                    <input name="phoneno" type="number" value="01853907553" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted"></small>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Address </label>
+                    <input name="address" type="text" value="Mymensingh" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <small id="emailHelp" class="form-text text-muted"></small>
+                  </div>
+              </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary">Update changes</button>
         </div>
       </div>
     </div>
   </div>
-    {{-- Modal is g --}}
+  <!-- Modal  For Create -->
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

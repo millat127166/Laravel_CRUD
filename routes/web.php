@@ -14,5 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', [CrudApplicaiton::class,'getData']);
+Route::get('create', [CrudApplicaiton::class,'create']);
 Route::post('adduser', [CrudApplicaiton::class,'store']);
+
+// Edite Route
+
+
+Route::get('edite/{id}', [CrudApplicaiton::class,'edite']);
+
+Route::post('update/{id}', [CrudApplicaiton::class,'update']);
+
+
+
+
+
 

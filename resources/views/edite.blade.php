@@ -9,8 +9,10 @@
     
       <div class="modal-body">
          
-         <form action="{{ url('update') }}/{{ $data->id }}" method="POST">
+            <form method="POST" action="{{ url('edite/'.$data->id) }}">
             @csrf
+            @method('PUT')
+     
             <div class="form-group">
                <label for="exampleInputEmail1">Frist Name <strong class="text-danger"> * </strong> </label>
                <input value="{{ $data->fname }}" name="fname" type="text" class="form-control @error('fname')is-invalid @enderror" id="exampleInputEmail1" aria-describedby="emailHelp">
@@ -45,7 +47,7 @@
                </small>
             </div>
             <div class="modal-footer">
-               <button type="submit" class="btn btn-primary">Add</button>
+               <button type="submit" class="btn btn-primary">Update</button>
             </div>
          </form>
       </div>

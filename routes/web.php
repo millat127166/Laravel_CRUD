@@ -17,12 +17,19 @@ Route::get('/', [CrudApplicaiton::class,'getData']);
 Route::get('create', [CrudApplicaiton::class,'create']);
 Route::post('adduser', [CrudApplicaiton::class,'store']);
 
+// Delete Route
+
+Route::delete('delete/{id}',[CrudApplicaiton::class,'delete']);
+
+
+
 // Edite Route
-
-
 Route::get('edite/{id}', [CrudApplicaiton::class,'edite']);
 
-Route::post('update/{id}', [CrudApplicaiton::class,'update']);
+
+Route::put('edite/{id}', [CrudApplicaiton::class,'update']);
+
+
 
 
 

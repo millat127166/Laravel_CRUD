@@ -58,19 +58,22 @@ All User's Form Database
         
           <td>
 
-            <a href="{{url('edite')}}/{{ $item->id }} ">
-      
-              <button type="submit" class="btn btn-primary">
-                  Edite
-              </button>
+   
+  
+             <a class="btn btn-primary btn-sm" href="{{ url('edite/'.$item->id ) }}"> 
+                Edite
+             </a>
 
-            </a>
         
-
-
                 || 
-              <button onclick="return confirm()" type="button" class="btn btn-danger">Delete</button> 
-    
+
+              <form method="POST" action=" {{ url('delete/' . $item->id) }} ">
+                @csrf
+                @method('DELETE')
+                
+            <button onclick="return confirm()" type="submit" class="btn btn-danger btn-sm">Delete</button> 
+
+          </form>
           </td>
         </tr>
 

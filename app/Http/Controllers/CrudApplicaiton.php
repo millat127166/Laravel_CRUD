@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Crud_Application;
+use Illuminate\Support\Facades\Session;
 
 class CrudApplicaiton extends Controller
 {
@@ -49,30 +50,38 @@ class CrudApplicaiton extends Controller
         $data = Crud_Application::find($id);
         return view('edite',compact('data'));
     }
-    public function update( Request $request , $id)
+    // Delete function
+    public function delete($id)
     {
 
-     
-      $update =  Crud_Application::find($id)->create([
+        $post = Crud_Application::find($id);
+        $post->delete();
+        return redirect('/')->with('success','Data Delete Successfully');
 
-            'fname'=>$request->fname,
-            'lname'=>$request->lname,
-            'phoneno'=>$request->phoneno,
-            'address'=>$request->address
-
-        ]);
-
-        if ($update==true) {
-            return redirect('/')->with('success','Data Update Successfully');
-        }else{
-            return "Millat Hussian";
-        }
-
-      
-
-
-       
     }
+
+
+    public function update(Request $request, $id)
+    {
+        $category           = Crud_Application::find($id);
+
+        $category->fname    = $request->get('fname');
+        $category->lname    = $request->get('lname');
+        $category->phoneno    = $request->get('phoneno');
+        $category->address    = $request->get('address');
+
+        $update =  $category->save();
+
+        if($update) {
+
+            return redirect()->to('/')->with('success','update Successfully');
+
+        }else{
+            return "Hello World Problem";
+        }
+        
+
+  }
 
 
 
